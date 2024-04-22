@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  tomcat:
+    # 전체 게시물 request 최대 크기 (기본 : 2MB)
+    max-http-form-post-size: 1024MB
+    # request body 최대 크기
+    max-swallow-size: 1024MB
+
+# Spring 설정
+spring:
+  profiles:
+    default: local
+
+  # multipart/form-data 크기 제한 설정
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 100MB
