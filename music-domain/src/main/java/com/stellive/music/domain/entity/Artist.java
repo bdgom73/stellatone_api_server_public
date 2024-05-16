@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +37,10 @@ public class Artist extends BaseEntity {
     @Column(name = "streamer_id")
     private String streamerId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
+
     @Builder
     public Artist(Long id, String name, String channelId, String description, String thumbnailUrl, String streamerId) {
         this.id = id;
@@ -59,5 +64,33 @@ public class Artist extends BaseEntity {
 
     public void changeThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public void changeTeam(Team team) {
+        if (ObjectUtils.isEmpty(team)) {
+            this.team = null;
+            return;
+        }
+
+        this.team = team;
+        team.getArtists().add(this);
+    }
+
+    public boolean isInTeam(Long teamId) {
+        Long tid = null;
+
+        if ( !ObjectUtils.isEmpty(this.team)  ) {
+            tid = this.team.getId();
+        }
+
+        return tid == teamId;
+    }
+
+    public void changeArtist(Artist artist) {
+        this.name = artist.getName();
+        this.streamerId = artist.getStreamerId();
+        this.channelId = artist.getChannelId();
+        this.description = artist.getDescription();
+        this.thumbnailUrl = artist.getThumbnailUrl();
     }
 }

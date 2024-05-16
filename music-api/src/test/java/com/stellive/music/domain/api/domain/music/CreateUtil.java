@@ -4,6 +4,7 @@ import com.stellive.music.domain.dto.ArtistMusicCountData;
 import com.stellive.music.domain.entity.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateUtil {
 
@@ -12,7 +13,7 @@ public class CreateUtil {
                 .id(id)
                 .title("testA" + id)
                 .videoId("testA" + id)
-                .artist(new Artist(id, "name" + id, "name" + id, "", "", ""))
+                .artists(List.of(new Artist(id, "name" + id, "name" + id, "", "", "")))
                 .thumbnails(new Thumbnail())
                 .isScrap(false)
                 .duration("PT4M11S")
@@ -43,19 +44,16 @@ public class CreateUtil {
                 .build();
     }
 
-    public static Member createMember(Long id) {
-        var value = "test".concat(id.toString());
-
-        return Member.builder()
-                .id(id)
-                .name(value)
-                .email(value)
-                .nickname(value)
-                .platformId(value)
-                .build();
-    }
-
     public static ArtistMusicCountData createArtistMusicCountData(Long count, Artist artist) {
         return new ArtistMusicCountData(artist, count);
+    }
+
+    public static Team createTeam(Long id) {
+        return Team.builder()
+                .id(id)
+                .generation(1)
+                .name("테스트".concat(id.toString()))
+                .enName("test".concat(id.toString()))
+                .build();
     }
 }

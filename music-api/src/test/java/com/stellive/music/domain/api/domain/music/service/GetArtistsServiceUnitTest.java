@@ -125,7 +125,7 @@ public class GetArtistsServiceUnitTest {
             given( artistRepository.findById(id) )
                     .willReturn( Optional.ofNullable(artist) );
 
-//            given( musicRepository.countByArtist(artist) ).willReturn( 20L );
+            given( musicRepository.countByArtistsIn(anyList()) ).willReturn(20L);
         }
 
         // when
