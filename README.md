@@ -35,9 +35,53 @@
   - 팀 (1기생, 2기생, 3기생 ...) 다중 조회
   - 팀 단건 조회
 
+## 🟣 appliaction yml 설정
+
+{ 변수명 } 부분을 본인에게 맞게 설정하여 사용해 주세요. 필요에 따라 수정이 가능 합니다.
+
+```yaml
+
+spring:
+  datasource:
+    url: ## { DB_URL }
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ## { DB_USERNAME }
+    password: ## { DB_PASSWORD }
+
+  h2:
+    console:
+      path: /h2/console
+      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        default_batch_fetch_size: 500
+        batch_fetch_style : padded
+        format_sql: true
+        
+platform:
+  google:
+    api:
+      key: ## { GOOGLE_API_KEY }
+
+```
+
 ## 🟣 실행
 프로젝트의 gradlew 이 있는 위치에서 api 모듈을 실행합니다.
 
 ```bash
 ./gradlew :music-api:bootRun
+```
+
+## 🟣 문서
+해당 프로젝트의 Swagger 문서 주소입니다.
+
+현재 `8080 포트` 기준입니다.
+
+```
+http://localhost:8080/swagger-ui/index.html
 ```
