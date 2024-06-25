@@ -62,11 +62,6 @@ spring:
         default_batch_fetch_size: 500
         batch_fetch_style : padded
         format_sql: true
-        
-platform:
-  google:
-    api:
-      key: ## { GOOGLE_API_KEY }
 
 ```
 
